@@ -4,7 +4,8 @@ import pytorch_lightning as pl
 from torch.utils.data import DataLoader, random_split
 from torch.nn import functional as F
 from torchvision.datasets import MNIST
-from torchvision import datasets, transforms
+from torchvision import transforms
+from torchvision import datasets
 import os
 
 
@@ -94,8 +95,8 @@ class LightningMNISTClassifier(pl.LightningModule):
     def val_dataloader(self):
         return DataLoader(self.mnist_val, batch_size=64)
 
-    def test_dataloader(self):
-        return DataLoader(self.mnist_test, batch_size=64)
+    # def test_dataloader(self):
+    #     return DataLoader(self.mnist_test, batch_size=64)
 
     def configure_optimizers(self):
         optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
@@ -104,6 +105,7 @@ class LightningMNISTClassifier(pl.LightningModule):
 
 # train
 model = LightningMNISTClassifier()
+# trainer = pl.Trainer(callbacks=[MyPrintingCallback()], gpus=1)
 trainer = pl.Trainer(callbacks=[MyPrintingCallback()])
 
 trainer.fit(model)
