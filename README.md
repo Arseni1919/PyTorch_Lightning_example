@@ -1,1 +1,1 @@
-CartPole Implementation with DQN and PyTorch Lightning
+PyTorch Lightning example with MNIST
